@@ -285,3 +285,54 @@ def visualize_hierarchy(topic_model,
     fig.update_layout({'width': width, 'height': height})
 
     return fig
+
+def plot_loss_arr(topic_model):
+    
+    epochs = list(range(1, len(topic_model.loss_arr) + 1))
+    
+    fig = go.Figure()
+    
+    fig.add_trace(go.Scatter(
+        x=epochs,
+        y=topic_model.loss_arr,
+        mode='lines+markers',
+        name='Epoch Loss',
+        line=dict(shape='spline', color='orange')
+    ))
+    
+    fig.update_layout(
+        title=dict(
+            text='Epoch Loss Over Training',
+            x=0.5,  # Center the title
+            xanchor='center',
+            pad=dict(t=100)
+        ),
+        xaxis=dict(
+            title='Epoch',
+            tickmode='auto',
+            nticks=20,
+            tickangle=0,
+            showgrid=True,
+            gridcolor='lightgrey',
+            linecolor='black',
+            showline=True,
+            mirror=True,
+            ticks='outside'
+        ),
+        yaxis=dict(
+            title='Loss',
+            showgrid=True,
+            gridcolor='lightgrey',
+            linecolor='black',
+            showline=True,
+            mirror=True,
+            ticks='outside',
+        ),
+        plot_bgcolor='white',
+        paper_bgcolor='white',
+        font=dict(color='black'),
+        margin=dict(l=60, r=40, t=40, b=40),
+        height=400
+    )
+    
+    return fig

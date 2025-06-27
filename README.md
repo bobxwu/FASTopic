@@ -120,6 +120,10 @@ preprocess = Preprocess()
 
 model = FASTopic(50, preprocess)
 top_words, doc_topic_dist = model.fit_transform(docs)
+
+# (Optional) Plot loss curve for the fitted topic model to monitor convergence
+fig = model.plot_loss_arr()
+fig.show()
 ```
 
 

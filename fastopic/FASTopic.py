@@ -68,6 +68,7 @@ class FASTopic:
 
         self.beta = None
         self.train_theta = None
+        self.loss_arr = None
         self.model = fastopic(num_topics, theta_temp, DT_alpha, TW_alpha)
 
         if preprocess is None:
@@ -179,6 +180,7 @@ class FASTopic:
 
         # Start training.
         self.model.train()
+        epoch_loss_arr = []
         for epoch in tqdm(range(1, epochs + 1), desc="Training FASTopic"):
             loss_rst_dict = defaultdict(float)
 
@@ -196,7 +198,9 @@ class FASTopic:
 
                 for key in rst_dict:
                     loss_rst_dict[key] += rst_dict[key] * batch_bow.shape[0]
-
+            
+            epoch_loss_arr.append(loss_rst_dict[key].item() / data_size)
+            
             if epoch % self.log_interval == 0:
                 output_log = f"Epoch: {epoch:03d}"
                 for key in loss_rst_dict:
@@ -206,6 +210,7 @@ class FASTopic:
         self.beta = self.get_beta()
         self.top_words = self.get_top_words(self.num_top_words)
         self.train_theta = self.transform(self, self.train_doc_embeddings)
+        self.loss_arr = epoch_loss_arr
 
         return self.top_words, self.train_theta
 
@@ -410,3 +415,7 @@ class FASTopic:
     def visualize_topic_weights(self, **args):
         assert_fitted(self)
         return _plot.visualize_topic_weights(self, **args)
+
+    def plot_loss_arr(self, **args):
+        assert_fitted(self)
+        return _plot.plot_loss_arr(self, **args)
