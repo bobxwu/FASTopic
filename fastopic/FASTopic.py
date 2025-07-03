@@ -68,7 +68,7 @@ class FASTopic:
 
         self.beta = None
         self.train_theta = None
-        self.loss_arr = None
+        self.loss_arr = []
         self.model = fastopic(num_topics, theta_temp, DT_alpha, TW_alpha)
 
         if preprocess is None:
@@ -210,7 +210,7 @@ class FASTopic:
         self.beta = self.get_beta()
         self.top_words = self.get_top_words(self.num_top_words)
         self.train_theta = self.transform(self, self.train_doc_embeddings)
-        self.loss_arr = epoch_loss_arr
+        self.loss_arr.extend(epoch_loss_arr)
 
         return self.top_words, self.train_theta
 
