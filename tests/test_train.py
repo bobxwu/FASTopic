@@ -30,6 +30,7 @@ def model_test(model, dataset, num_topics):
     assert train_theta.shape[0] == len(docs)
     assert test_theta.shape[0] == len(dataset.test_texts)
 
+    model.plot_loss_arr()
     model.get_topic(0)
     model.visualize_topic()
     model.visualize_topic_hierarchy()
