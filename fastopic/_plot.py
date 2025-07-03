@@ -302,7 +302,7 @@ def plot_loss_arr(topic_model):
     
     fig.update_layout(
         title=dict(
-            text='Epoch Loss Over Training',
+            text='Training loss per epoch',
             x=0.5,  # Center the title
             xanchor='center',
             pad=dict(t=100)
