@@ -222,6 +222,7 @@ We summarize the frequently used APIs of FASTopic here. It's easier for you to l
 | Get top words of all topics    |  `.get_top_words()` |
 | Get top words and probabilities of a topic    |  `.get_topic(topic_idx=10)` |
 | Get topic weights over the input dataset    |  `.get_topic_weights()` |
+| Get topic embeddings    |  `.topic_embeddings()` |
 | Get topic activity over time    |  `.topic_activity_over_time(time_slices)` |
 | Save model    |  `.save(path=path)` |
 | Load model    |  `.from_pretrained(path=path)` |
